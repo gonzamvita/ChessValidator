@@ -30,9 +30,6 @@ class Board
 end
 
 class Rook
-  def initialize
-  end
-
   def self.validate_move(origin, destination)
     origin[0] == destination[0] || origin [1] == destination [1]
   end
@@ -40,33 +37,23 @@ end
 
 
 class Pawn
-  attr_reader :position
-
-  def initialize
+  def self.validate_move(origin, destination)
+    return first_movement if (origin[0] - destination[0]) == 2
+    (origin[0] - destination[0]) == 1 && (origin[1] == destination[1])
   end
 
-  def self.validate_move(origin, destination)
-    origin[0] == destination[0] || origin [1] == destination [1]
+  def first_movement
+    (origin[0] - destination[0]) == 2 && (origin[1] == destination[1])
   end
 end
 
 class King
-  attr_reader :position
-
-  def initialize
-  end
-
   def self.validate_move(origin, destination)
     origin[0] == destination[0] || origin [1] == destination [1]
   end
 end
 
 class Knight
-  attr_reader :position
-
-  def initialize
-  end
-
   def self.validate_move(origin, destination)
     if (origin[0]-destination[0]).abs == 1
       (origin[1]-destination[1]).abs == 2
@@ -77,22 +64,12 @@ class Knight
 end
 
 class Bishop
-  attr_reader :position
-
-  def initialize
-  end
-
   def self.validate_move(origin, destination)
     (origin[0]-destination[0]).abs == (origin[1]-destination[1]).abs
   end
 end
 
 class Queen
-  attr_reader :position
-
-  def initialize
-  end
-
   def self.validate_move(origin, destination)
     if (origin[0]-destination[0]).abs == (origin[1]-destination[1]).abs
       true
